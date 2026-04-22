@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Receipt</title>
+</head>
+<body style="font-family: Arial; text-align:center;">
+
+<h1>🧾 Your Receipt</h1>
+<div id="receipt"></div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const data = params.get("data");
+
+  if (data) {
+    const receipt = JSON.parse(decodeURIComponent(data));
+
+    document.getElementById("receipt").innerHTML = `
+      <p><strong>Items:</strong> ${receipt.items.join(", ")}</p>
+      <p><strong>Total Items:</strong> ${receipt.totalItems}</p>
+      <p><strong>Spent:</strong> $${receipt.spent}</p>
+      <p><strong>Remaining Balance:</strong> $${receipt.balance}</p>
+    `;
+  } else {
+    document.getElementById("receipt").innerText = "No receipt found.";
+  }
+</script>
+
+</body>
+</html>
